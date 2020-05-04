@@ -1,38 +1,19 @@
-# WellMet - Social Distance Tracker
+# Usafe
+ปกป้องคนที่คุณรัก ให้ห่างไกลจากไวรัส Covid-19 ด้วยเทคโนโลยีที่ทุกคนมี
 
-## Features
-- Track close contact with another user via Bluetooth LE iBeacon technology.
-- Alert when another user getting too close to keep the distance.
-- Dashboard to summary met history number and social distance level.
-- View detail of user close contact history e.g. time and place.
-- Using contact tracing cryptography suggested by the join force Apple + Google contact tracing but the advertise proximity ID with existing iBeacon spec.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+เนื่องจากสถานการณ์ปัจจุบันจากเชื้อไวรัสโควิด-19 มีระดับความรุนแรงที่เพิ่มขึ้นและสถานการณ์จำนวนผู้ป่วยและเสียชีวิตเพิ่มขึ้นเรื่อยๆ คำถามคือทำอย่างไรให้คนติดเชื้อน้อยลง ?
+ทำอย่างไรถึงจะรู้ได้ทันเวลาว่าคนที่มีโอกาสแพร่เชื้อป็นใครบ้าง ?
+ด้วยเทคโนโลยีที่ทุกคนมีในมือ นั้นคือ “มือถือของพวกเราทุกคน”
+เราจึงคิด”ยูเซฟ” ขึ้นมาเพื่อช่วยเหลือคน โดยเฉพาะคนไทย เราเห็นว่าหนึ่งชีวิตที่ช่วยได้ย่อมมีความหมายและสำคัญ
 
-![ss.jpg](screenshot/ss.jpg)
+ยูเซฟ คือ แพลตฟอร์มในรูปแบบโอเพนซอร์ซ ใช้เทคนิค Contact tracer ที่สามารถทำให้เรารู้ถึงความเสี่ยงของตนเองได้ว่ามีโอกาสติดเชื้อโควิท-19 หรือไม่โดยอาศัยการคำนวณระยะห่างจากผู้ติดเชื้อและระยะเวลา เพื่อทำให้หมอและหน่วยงานที่กำกับดูแลการแพร่ระบาดของไวรัส Covid-19 ให้ทราบถึงบุคลที่เคยอยู่ระยะใกล้กับผู้ติดเชื้อ ว่าเป็นใคร โดยยูเซฟแพลตฟอร์ม uSafe Platform ตัวนี้ไม่ต้องการที่รู้ตำแหน่งของคุณ แต่ต้องการรู้ว่าใครมีความเสี่ยงจากการอยู่ใกล้ผู้ติดเชื้อผ่านเบอร์โทรศัพท์
 
-## How it work?
-WellMet is a social distance tracker. It allows the user to track the number of close contact from the smartphone Bluetooth sensor. By advertising and scanning device UUID(Universally unique identifier) using low energy wireless radio also known as the beacon, another user can collect and range the distance nearby devices by the signal strength. WellMet will collect other device’s UUID when only in close range at 2 meters and will alert the user when the device closer than 1 meter. The application will keep the record of the met device in the offline database on the user phone and show a number of close contact users within the last 7 days.
+บนนิยามที่ว่า “ตรวจพบ หยุดเชื้อ เพื่อคุณ”
+(1) Infection ติดเชื้อ คนที่อยู่ระยะใกล้ และ ระยะนาน จะรู้ตัวจากการแจ้งเตือนยูเซฟ แพลตฟอร์มจะ
+(2) Risk รู้ความเสี่ยง เมื่อยูเซฟคำนวณประวัติจากระยะห่างของคน และระยะเวลาที่อยู่ร่วมกันจะทำการใช้ AI ประมวลผลย้อนหลัง 14 วันถึงระดับความเสี่ยงที่จะเกิดขึ้นกับตัวเอง และสามารถ
+(3) Tracker ติดตามตัวได้ โดยจะทำให้ลดภาระการทำงานของคุณหมอและหน่วยงานรัฐที่ไม่ต้องประกาศตามหาคนให้มารายงานตัวเมื่อพบว่ามีผู้ติดเชื้ออยู่ในสถานที่นั้น
 
-The privacy-first principle applied to WellMet design. Even the user device UUID has been advertised and everyone can collect it for tracking the user. The UUID is designed to collect without reveal user identity. It creates from the derivative of the unique user code one-way hashing with the date of advertising the UUID. The UUID will change daily to prevent tracking user location by other scanners over 15 minutes but still provide enough identity for the app to track numbers without counting a completely random beacon all the time.
+“ยูเซฟ ปกป้องคนที่คุณรัก ให้ห่างไกลจากไวรัส Covid-19 ด้วยเทคโนโลยีที่ทุกคนมี”
 
-The user code is a uniquely large number generate from a pseudo-random number generator. Because it cannot create the true random number in the computer, WellMet intentionally collects a phone number from the user to provide more uniqueness to the user code. The phone number can be any number the user likes. It does not use for any application beyond this.
 
-WellMet using only the offline database on the user phone. Not even internet permission required to run the app. From this high level of data privacy, it cannot be useful to other services. Health care services like WHO, local government could use the data to track potential close contact infected users. The data exporting feature comes to help. Without the user manually export and send their data to the service, the data still safe in the user's hand. The services can create an online infected database for other users to look up their advertised beacon UUIDs re-create from their user code to see if they ever get close contact with the infected and determine their own situation. Because of using the one-way hashing technique, no user can be tracked down by anyone, not by even the government or WellMet creator.
-
-## License
-```
-WellMet - Social Distance Tracker
-Copyright (C) 2020  Artiya Thinkumpang
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
-```
